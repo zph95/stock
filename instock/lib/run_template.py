@@ -48,6 +48,7 @@ def run_with_args(run_fun, *args):
         # 当前时间作业 python xxx.py
         try:
             run_date, run_date_nph = trd.get_trade_date_last()
+            print(run_fun.__name__)
             if run_fun.__name__.startswith('save_nph'):
                 run_fun(run_date_nph, False)
             elif run_fun.__name__.startswith('save_after_close'):

@@ -32,7 +32,11 @@ def stock_selection() -> pd.DataFrame:
         "source": "SELECT_SECURITIES",
         "client": "WEB"
     }
-    r = requests.get(url, params=params)
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
+    print(url, headers, params)
+    r = requests.get(url, headers=headers, timeout=3, params=params)
+    # r = requests.get(url, params=params)
     data_json = r.json()
     data = data_json["result"]["data"]
     if not data:
@@ -83,7 +87,11 @@ def stock_selection_params():
         "client": "WEB"
     }
 
-    r = requests.get(url, params=params)
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
+    print(url, headers, params)
+    r = requests.get(url, headers=headers, timeout=3, params=params)
+    # r = requests.get(url, params=params)
     data_json = r.json()
     zxzb = data_json["zxzb"]  # 指标
     print(zxzb)

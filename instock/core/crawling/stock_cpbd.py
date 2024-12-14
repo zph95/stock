@@ -26,7 +26,11 @@ def stock_cpbd_em(symbol: str = "688041") -> pd.DataFrame:
         symbol = f"SZ{symbol}"
     params = {"code": symbol}
 
-    r = requests.get(url, params=params)
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
+    print(url, headers, params)
+    r = requests.get(url, headers=headers, timeout=3, params=params)
+    # r = requests.get(url, params=params)
     data_json = r.json()
     zxzb = data_json["zxzb"]  # 主要指标
     if len(zxzb) < 1:
@@ -124,7 +128,11 @@ def stock_zjlx_em(symbol: str = "688041") -> pd.DataFrame:
         "secid": symbol
     }
 
-    r = requests.get(url, params=params)
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
+    print(url, headers, params)
+    r = requests.get(url, headers=headers, timeout=3, params=params)
+    # r = requests.get(url, params=params)
     data_json = r.json()
     klines = data_json["klines"]  # 主要指标
     "日期","主力净流入额","小单净流入额","中单净流入额","大单净流入额","超大单净流入额","主力净流入占比", "小单净流入占比", "中单净流入占比", "大单净流入占比", "超大单净流入占比"

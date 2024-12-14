@@ -12,7 +12,7 @@ TAG2=latest
 echo " docker build -f Dockerfile -t ${DOCKER_NAME} ."
 docker build -f Dockerfile -t ${DOCKER_NAME}:${TAG1} -t ${DOCKER_NAME}:${TAG2} .
 echo "#################################################################"
-echo " docker push ${DOCKER_NAME} "
+#echo " docker push ${DOCKER_NAME} "
 
-docker push ${DOCKER_NAME}:${TAG1}
-docker push ${DOCKER_NAME}:${TAG2}
+#docker push ${DOCKER_NAME}:${TAG1}
+#docker push ${DOCKER_NAME}:${TAG2}

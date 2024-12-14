@@ -310,7 +310,16 @@ def tool_trade_date_hist_sina() -> pd.DataFrame:
     :rtype: pandas.DataFrame
     """
     url = "https://finance.sina.com.cn/realstock/company/klc_td_sh.txt"
-    r = requests.get(url)
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
+    print(headers, url)
+    r = requests.get(url, headers=headers, timeout=3)
+    if r.status_code == 200:
+        # 如果请求成功，打印响应的内容
+        print(r.text)
+    else:
+        # 如果请求失败，打印错误信息
+        print(f"请求失败，状态码：{r.status_code}")
     js_code = MiniRacer()
     js_code.eval(hk_js_decode)
     dict_list = js_code.call(
