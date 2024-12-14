@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 export PYTHONIOENCODING=utf-8
 export LANG=zh_CN.UTF-8

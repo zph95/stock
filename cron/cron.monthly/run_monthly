@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 #清除缓存数据
 rm -rf /data/InStock/instock/cache/hist/*

@@ -11,13 +11,12 @@ from sqlalchemy import inspect
 __author__ = 'myh '
 __date__ = '2023/3/10 '
 
-db_host = "localhost"  # 数据库服务主机
-db_user = "root"  # 数据库访问用户
-db_password = "root"  # 数据库访问密码
+db_host = "127.0.0.1"  # 数据库服务主机
+db_user = "instockdb"  # 数据库访问用户
+db_password = "**"  # 数据库访问密码
 db_database = "instockdb"  # 数据库名称
 db_port = 3306  # 数据库服务端口
 db_charset = "utf8mb4"  # 数据库字符集
-
 # 使用环境变量获得数据库,docker -e 传递
 _db_host = os.environ.get('db_host')
 if _db_host is not None:
@@ -43,7 +42,7 @@ MYSQL_CONN_DBAPI = {'host': db_host, 'user': db_user, 'password': db_password, '
                     'charset': db_charset, 'port': db_port, 'autocommit': True}
 
 MYSQL_CONN_TORNDB = {'host': f'{db_host}:{str(db_port)}', 'user': db_user, 'password': db_password,
-                     'database': db_database, 'charset': db_charset, 'max_idle_time': 3600, 'connect_timeout': 1000}
+                     'database': db_database, 'charset': db_charset,'max_idle_time': 3600, 'connect_timeout': 1000}
 
 
 # 通过数据库链接 engine
