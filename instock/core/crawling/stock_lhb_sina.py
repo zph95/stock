@@ -26,7 +26,11 @@ def stock_lhb_detail_daily_sina(date: str = "20240222") -> pd.DataFrame:
     date = "-".join([date[:4], date[4:6], date[6:]])
     url = "https://vip.stock.finance.sina.com.cn/q/go.php/vInvestConsult/kind/lhb/index.phtml"
     params = {"tradedate": date}
-    r = requests.get(url, params=params)
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
+    print(url, headers, params)
+    r = requests.get(url, headers=headers, timeout=3, params=params)
+    # r = requests.get(url, params=params)
     soup = BeautifulSoup(r.text, features="lxml")
     selected_html = soup.find(name="div", attrs={"class": "list"}).find_all(
         name="table", attrs={"class": "list_table"}
@@ -64,7 +68,11 @@ def _find_last_page(
         "last": recent_day,
         "p": "1",
     }
-    r = requests.get(url, params=params)
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
+    print(url, headers, params)
+    r = requests.get(url, headers=headers, timeout=3, params=params)
+    # r = requests.get(url, params=params)
     soup = BeautifulSoup(r.text, "lxml")
     try:
         previous_page = int(soup.find_all(attrs={"class": "page"})[-2].text)
@@ -76,7 +84,11 @@ def _find_last_page(
                 "last": recent_day,
                 "p": previous_page,
             }
-            r = requests.get(url, params=params)
+            headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
+            print(url, headers, params)
+            r = requests.get(url, headers=headers, timeout=3, params=params)
+            # r = requests.get(url, params=params)
             soup = BeautifulSoup(r.text, features="lxml")
             last_page = int(soup.find_all(attrs={"class": "page"})[-2].text)
             if last_page != previous_page:
@@ -106,7 +118,11 @@ def stock_lhb_ggtj_sina(symbol: str = "5") -> pd.DataFrame:
             "last": symbol,
             "p": page,
         }
-        r = requests.get(url, params=params)
+        headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
+        print(url, headers, params)
+        r = requests.get(url, headers=headers, timeout=3, params=params)
+        # r = requests.get(url, params=params)
         temp_df = pd.read_html(StringIO(r.text))[0].iloc[0:, :]
         big_df = pd.concat(objs=[big_df, temp_df], ignore_index=True)
     big_df["股票代码"] = big_df["股票代码"].astype(str).str.zfill(6)
@@ -142,7 +158,11 @@ def stock_lhb_yytj_sina(symbol: str = "5") -> pd.DataFrame:
             "last": "5",
             "p": page,
         }
-        r = requests.get(url, params=params)
+        headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
+        print(url, headers, params)
+        r = requests.get(url, headers=headers, timeout=3, params=params)
+        # r = requests.get(url, params=params)
         temp_df = pd.read_html(StringIO(r.text))[0].iloc[0:, :]
         big_df = pd.concat([big_df, temp_df], ignore_index=True)
     big_df.columns = [
@@ -179,7 +199,11 @@ def stock_lhb_jgzz_sina(symbol: str = "5") -> pd.DataFrame:
             "last": symbol,
             "p": page,
         }
-        r = requests.get(url, params=params)
+        headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
+        print(url, headers, params)
+        r = requests.get(url, headers=headers, timeout=3, params=params)
+        # r = requests.get(url, params=params)
         temp_df = pd.read_html(StringIO(r.text))[0].iloc[0:, :]
         if temp_df.empty:
             continue
@@ -214,7 +238,11 @@ def stock_lhb_jgmx_sina() -> pd.DataFrame:
     params = {
         "p": "1",
     }
-    r = requests.get(url, params=params)
+    headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
+    print(url, headers, params)
+    r = requests.get(url, headers=headers, timeout=3, params=params)
+    # r = requests.get(url, params=params)
     soup = BeautifulSoup(r.text, features="lxml")
     try:
         last_page_num = int(soup.find_all(attrs={"class": "page"})[-2].text)
@@ -225,7 +253,11 @@ def stock_lhb_jgmx_sina() -> pd.DataFrame:
         params = {
             "p": page,
         }
-        r = requests.get(url, params=params)
+        headers = {
+        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/58.0.3029.110 Safari/537.3'}
+        print(url, headers, params)
+        r = requests.get(url, headers=headers, timeout=3, params=params)
+        # r = requests.get(url, params=params)
         temp_df = pd.read_html(StringIO(r.text))[0].iloc[0:, :]
         big_df = pd.concat(objs=[big_df, temp_df], ignore_index=True)
     big_df["股票代码"] = big_df["股票代码"].astype(str).str.zfill(6)
