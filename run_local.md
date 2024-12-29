@@ -31,13 +31,3 @@ ALTER TABLE instockdb.cn_stock_strategy_parking_apron CONVERT TO CHARACTER SET u
 ALTER TABLE instockdb.cn_stock_strategy_turtle_trade CONVERT TO CHARACTER SET utf8mb3 COLLATE utf8mb3_uca1400_ai_ci;
 ALTER TABLE instockdb.cn_stock_top CONVERT TO CHARACTER SET utf8mb3 COLLATE utf8mb3_uca1400_ai_ci;
 
-## docker启动
-
-docker run -dit --name InStock 
-    -p 9988:9988
-    -e db_host=192.168.1.11
-    -e db_user=instockdb
-    -e db_password=**
-    -e db_database=instockdb
-    -e db_port=3306
-    mayanghua/instock:latest

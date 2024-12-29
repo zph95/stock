@@ -2,13 +2,14 @@
 # https://hub.docker.com/_/python/tags?page=1&name=3.11-slim-bullseye
 FROM docker.io/python:3.11-slim-bullseye
 
-MAINTAINER myh
+MAINTAINER zph
 #增加语言utf-8
 ENV LANG=zh_CN.UTF-8
 ENV LC_CTYPE=zh_CN.UTF-8
 ENV LC_ALL=C
 ENV PYTHONPATH=/data/InStock
 EXPOSE 9988
+EXPOSE 8888
 
 # 使用国内镜像地址加速。修改debian apt更新地址，pip地址，设置时区
 # https://opsx.alibaba.com/mirror
@@ -38,6 +39,7 @@ RUN ln -sf /usr/share/zoneinfo/Asia/Shanghai /etc/localtime && \
     pip install tornado && \
     pip install mini-racer && \
     pip install easytrader && \
+    pip install notebook && \
     curl -SL https://prdownloads.sourceforge.net/ta-lib/ta-lib-0.4.0-src.tar.gz | tar -xzC . && \
     cd ta-lib/  && \
     ./configure --prefix=/usr && \
