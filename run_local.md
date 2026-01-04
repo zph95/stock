@@ -1,3 +1,9 @@
+# python env
+
+python3.11 -m venv .venv
+
+source .venv/bin/activate
+
 ## 本地开发启动conda环境
 
 conda activate stock
